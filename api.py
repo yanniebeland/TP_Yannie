@@ -20,3 +20,22 @@ def lister_parties(idul):
             url_lister, donnees.status_code)
         )
 
+def initialiser_partie(idul):
+    """
+    (Qu'est-ce que fait ma fonction?)
+    (Quels sont les paramètres en entrée de ma fonction) idul
+    (Quelle est la sortie et/ou le retour de ma fonction)
+    """
+    url_debut = 'https://python.gel.ulaval.ca/quoridor/api/initialiser/'
+    try:
+        donnees = requests.post(url_debut, data={'idul': idul})
+        if donnees.status_code == 200:
+            json_donnees = donnees.json()
+            return json_donnees['id'], json_donnees['état']
+        else:
+            print("Le POST sur '{}' a produit le code d'erreur {}".format(
+                url_debut, donnees.status_code)
+            )
+    except RuntimeError as error:
+        print(error)
+
