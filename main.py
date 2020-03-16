@@ -1,4 +1,5 @@
 import argparse
+import api
 
 
 jeu_prof = {
@@ -104,14 +105,11 @@ def afficher_damier_ascii(etat_de_jeu):
     sortie += "  | 1   2   3   4   5   6   7   8   9\n"
     print(sortie)
     
-# def jouer_coup(id_partie, type_coup, position):
-
-
-def main():
-    afficher_damier_ascii(jeu_prof)
 
 
 if __name__ == '__main__':
-    main()
-
-
+    #init = api.initialiser_partie('yabel34')
+    #print(init)
+    coup = api.jouer_coup('0c49eea5-75de-46f6-9001-f511d73f6400', 'D', (6,4))
+    afficher_damier_ascii(coup['état'])
+    print(coup)
