@@ -2,16 +2,20 @@ import argparse
 import api
 
 
-jeu_prof = {
-    "joueurs": [
-        {"nom": "idul", "murs": 7, "pos": [5, 5]}, 
-        {"nom": "automate", "murs": 3, "pos": [8, 6]}
-    ], 
-    "murs": {
-        "horizontaux": [[4, 4], [2, 6], [3, 8], [5, 8], [7, 8]], 
-        "verticaux": [[6, 2], [4, 4], [2, 6], [7, 5], [7, 7]]
-    }
-}
+# État de jeu donné dans l'énoncé du travail (utilisé pour tester la fonction 2).
+#jeu_prof = {
+    #"joueurs": [
+        #{"nom": "idul", "murs": 7, "pos": [5, 5]}, 
+        #{"nom": "automate", "murs": 3, "pos": [8, 6]}
+    #], 
+    #"murs": {
+        #"horizontaux": [[4, 4], [2, 6], [3, 8], [5, 8], [7, 8]], 
+        #"verticaux": [[6, 2], [4, 4], [2, 6], [7, 5], [7, 7]]
+    #}
+#}
+
+# Fonction 1. 
+# La fonction sert à recevoir les commandes argparse d'un terminal. De plus, elle ne prend rien en entrée et retourne un objet parser contenant les commandes appelées.  
 
 def analyser_commande():
     parser = argparse.ArgumentParser(description='Jeu Quoridor - phase 1')
@@ -21,15 +25,12 @@ def analyser_commande():
                         help='Lister les identifiants de vos 20 dernières parties.')
     return parser.parse_args()
 
+# Fonction 2. 
+# La fonction ci-dessous permet de, à chaque coup, afficher le damier complet de l'état de jeu actuel pour que le prochain jouer puisse prévoir son coup. Cette fonction accepte en entrée un dicitonnaire (état_de_jeu) contenant toutes les infos de l'état du jeu actuel pour pouvoir l'afficher en sortie. Ainsi, cette fonction ne retourne rien, mais affiche le damier de l'état de jeu actuel (pions et murs placés aux bons endroits selon le déroulement de la partie).
+# En première ligne de ma fonction, j'ai indiqué que ma matrice de jeu devra afficher un certain nombre de colonnes et de lignes, mais qu'elle devra également présenter le chiffre associé à chacune des lignes/colonnes pouvant accueillir un pion (d'où la variable 'jeu').
+
 def afficher_damier_ascii(etat_de_jeu):
-    """
-    Fonction pour afficher à la console le damier complet actuel d'un état de jeu.
-    :param etat_de_jeu: Un dictionnaire contenant tous les infos d'un état de jeu.
-    :return: None
-    """
-    
     jeu, colonne, ligne = [], [], []
-    
     for i in range(9):
         mat_jeu, mat_colonne, mat_ligne = [], [], []
         for j in range(9):
@@ -39,7 +40,6 @@ def afficher_damier_ascii(etat_de_jeu):
         jeu.append(mat_jeu)
         colonne.append(mat_colonne)
         ligne.append(mat_ligne)
-    
     posi_j_1 = etat_de_jeu['joueurs'][0]['pos']
     posi_j_2 = etat_de_jeu['joueurs'][1]['pos']
     jeu[posi_j_1[1] - 1][posi_j_1[0] - 1] = '1'
@@ -53,9 +53,8 @@ def afficher_damier_ascii(etat_de_jeu):
     for a, b in etat_de_jeu['murs']['verticaux']:
         colonne[b - 1][a - 1] = '|'
     colonne.reverse()
-    
-    sortie = "   -----------------------------------\n"
-    
+    sortie = "Légende: 1={}, 2=automate\n".format(etat_de_jeu['joueurs'][0]['nom'])
+    sortie += "   -----------------------------------\n"
     for i in range(9):
         if i == 8:
             sortie += "1 |"
@@ -105,11 +104,11 @@ def afficher_damier_ascii(etat_de_jeu):
     sortie += "  | 1   2   3   4   5   6   7   8   9\n"
     print(sortie)
     
+# Ici, j'ai voulu tester mon programme en initialisant une nouvelle partie et en utilisant l'identifiant résultant pour ensuite jouer mes coups.
 
-
-if __name__ == '__main__':
+#if __name__ == '__main__':
     #init = api.initialiser_partie('yabel34')
     #print(init)
-    coup = api.jouer_coup('0c49eea5-75de-46f6-9001-f511d73f6400', 'D', (6,4))
-    afficher_damier_ascii(coup['état'])
-    print(coup)
+    #coup = api.jouer_coup('99d3d6f8-d53e-4a3c-a3a8-cc82664c166a', 'D', (5,2))
+    #afficher_damier_ascii(coup['état'])
+    #print(coup)
