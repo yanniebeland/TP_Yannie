@@ -6,17 +6,18 @@ import json
 
 def lister_parties(idul):
     url_lister = 'https://python.gel.ulaval.ca/quoridor/api/lister/'
-    donnees = requests.get(url_lister, params={'idul': idul})
-    if donnees.status_code == 200:
-        donnees = donnees.text
-        json_x = json.loads(donnees)
-        json_y = json.dumps(json_x, indent=2)
-        print(json_y)  
-    else:
-        print("Le GET sur '{}' a produit le code d'erreur {}".format(
-            url_lister, donnees.status_code)
-        )
-
+    try:
+        donnees = requests.get(url_lister, params={'idul': idul})
+        if donnees.status_code == 200:
+            donnees = donnees.text
+            json_x = json.loads(donnees)
+            json_y = json.dumps(json_x, indent=2)
+            print(json_y)  
+        else:
+            print("Le GET sur '{}' a produit le code d'erreur {}".format(url_lister, donnees.status_code))
+    except RuntimeError as error:
+        print(error)
+        
 # Fonction 4. La fonction ci-dessous permet de débuter une nouvelle partie. Elle initialise une partie en acceptant en entrée l'idul du joueur s'apprêtant jouer cette partie. Cette fonction retourne un tuple contenant l'identifiant de la partie et l'état initial du jeu. De plus, en cas d'erreur (message présent dans la réponse, la fonction soulève une exception de type RuntimeError avec le message reçu.
 
 def initialiser_partie(idul):
@@ -44,6 +45,8 @@ def jouer_coup(id_partie, type_coup, position):
             json_donnees = donnees.json()
             if 'gagnant' in json_donnees:
                 raise StopIteration(json_donnees['gagnant'])
+            elif 'message' in json_donnees:
+                print(json_donnees['message'])
             else:
                 return json_donnees
         else:
