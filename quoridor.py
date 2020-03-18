@@ -109,6 +109,6 @@ def afficher_damier_ascii(etat_de_jeu):
 #if __name__ == '__main__':
     #init = api.initialiser_partie('yabel34')
     #print(init)
-    #coup = api.jouer_coup('99d3d6f8-d53e-4a3c-a3a8-cc82664c166a', 'D', (5,2))
+    #coup = api.jouer_coup('989fc7d3-a243-402e-bde9-0875f083e9e6', 'D', (5,2))
     #afficher_damier_ascii(coup['état'])
     #print(coup)
