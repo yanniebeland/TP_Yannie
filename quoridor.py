@@ -5,17 +5,19 @@ import api
 # État de jeu donné dans l'énoncé du travail (utilisé pour tester la fonction 2).
 #jeu_prof = {
     #"joueurs": [
-        #{"nom": "idul", "murs": 7, "pos": [5, 5]}, 
+        #{"nom": "idul", "murs": 7, "pos": [5, 5]},
         #{"nom": "automate", "murs": 3, "pos": [8, 6]}
-    #], 
+    #],
     #"murs": {
-        #"horizontaux": [[4, 4], [2, 6], [3, 8], [5, 8], [7, 8]], 
+        #"horizontaux": [[4, 4], [2, 6], [3, 8], [5, 8], [7, 8]],
         #"verticaux": [[6, 2], [4, 4], [2, 6], [7, 5], [7, 7]]
     #}
 #}
 
-# Fonction 1. 
-# La fonction sert à recevoir les commandes argparse d'un terminal. De plus, elle ne prend rien en entrée et retourne un objet parser contenant les commandes appelées.  
+# Fonction 1.
+# La fonction sert à recevoir les commandes argparse
+# d'un terminal. De plus, elle ne prend rien en entrée
+# et retourne un objet parser contenant les commandes appelées.  
 
 def analyser_commande():
     parser = argparse.ArgumentParser(description='Jeu Quoridor - phase 1')
@@ -25,9 +27,21 @@ def analyser_commande():
                         help='Lister les identifiants de vos 20 dernières parties.')
     return parser.parse_args()
 
-# Fonction 2. 
-# La fonction ci-dessous permet de, à chaque coup, afficher le damier complet de l'état de jeu actuel pour que le prochain jouer puisse prévoir son coup. Cette fonction accepte en entrée un dicitonnaire (état_de_jeu) contenant toutes les infos de l'état du jeu actuel pour pouvoir l'afficher en sortie. Ainsi, cette fonction ne retourne rien, mais affiche le damier de l'état de jeu actuel (pions et murs placés aux bons endroits selon le déroulement de la partie).
-# En première ligne de ma fonction, j'ai indiqué que ma matrice de jeu devra afficher un certain nombre de colonnes et de lignes, mais qu'elle devra également présenter le chiffre associé à chacune des lignes/colonnes pouvant accueillir un pion (d'où la variable 'jeu').
+# Fonction 2.
+# La fonction ci-dessous permet de, à chaque coup, afficher
+# le damier complet de l'état de jeu actuel pour que le
+# prochain jouer puisse prévoir son coup. Cette fonction
+# accepte en entrée un dicitonnaire (état_de_jeu) contenant
+# toutes les infos de l'état du jeu actuel pour pouvoir
+# l'afficher en sortie. Ainsi, cette fonction ne retourne
+# rien, mais affiche le damier de l'état de jeu actuel
+# (pions et murs placés aux bons endroits selon le 
+# déroulement de la partie). En première ligne de ma
+# fonction, j'ai indiqué que ma matrice de jeu devra
+# afficher un certain nombre de colonnes et de lignes,
+# mais qu'elle devra également présenter le chiffre
+# associé à chacune des lignes/colonnes pouvant
+# accueillir un pion (d'où la variable 'jeu').
 
 def afficher_damier_ascii(etat_de_jeu):
     jeu, colonne, ligne = [], [], []
@@ -49,7 +63,7 @@ def afficher_damier_ascii(etat_de_jeu):
     for a, b in etat_de_jeu['murs']['horizontaux']:
         ligne[b - 1][a - 1] = '---'
     ligne.reverse()
-    
+
     for a, b in etat_de_jeu['murs']['verticaux']:
         colonne[b - 1][a - 1] = '|'
     colonne.reverse()
@@ -89,26 +103,36 @@ def afficher_damier_ascii(etat_de_jeu):
             sortie += "  |"
             sortie += "{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}{}".format(
                 ligne[i][0], '-' if ligne[i][0] == '---' else colonne[i + 1 if i < 8 else 0][1],
-                ligne[i][1] if ligne[i][0] != '---' else '---', '-' if ligne[i][1] == '---' else colonne[i + 1 if i < 8 else 0][2],
-                ligne[i][2] if ligne[i][1] != '---' else '---', '-' if ligne[i][2] == '---' else colonne[i + 1 if i < 8 else 0][3],
-                ligne[i][3] if ligne[i][2] != '---' else '---', '-' if ligne[i][3] == '---' else colonne[i + 1 if i < 8 else 0][4],
-                ligne[i][4] if ligne[i][3] != '---' else '---', '-' if ligne[i][4] == '---' else colonne[i + 1 if i < 8 else 0][5],
-                ligne[i][5] if ligne[i][4] != '---' else '---', '-' if ligne[i][5] == '---' else colonne[i + 1 if i < 8 else 0][6],
-                ligne[i][6] if ligne[i][5] != '---' else '---', '-' if ligne[i][6] == '---' else colonne[i + 1 if i < 8 else 0][7],
-                ligne[i][7] if ligne[i][6] != '---' else '---', '-' if ligne[i][7] == '---' else colonne[i + 1 if i < 8 else 0][8],
-                ligne[i][8] if ligne[i][7] != '---' else '---', '-' if ligne[i][8] == '---' else colonne[i + 1 if i < 8 else 0][0]
+                ligne[i][1] if ligne[i][0] != '---' else '---',
+                '-' if ligne[i][1] == '---' else colonne[i + 1 if i < 8 else 0][2],
+                ligne[i][2] if ligne[i][1] != '---' else '---',
+                '-' if ligne[i][2] == '---' else colonne[i + 1 if i < 8 else 0][3],
+                ligne[i][3] if ligne[i][2] != '---' else '---',
+                '-' if ligne[i][3] == '---' else colonne[i + 1 if i < 8 else 0][4],
+                ligne[i][4] if ligne[i][3] != '---' else '---',
+                '-' if ligne[i][4] == '---' else colonne[i + 1 if i < 8 else 0][5],
+                ligne[i][5] if ligne[i][4] != '---' else '---',
+                '-' if ligne[i][5] == '---' else colonne[i + 1 if i < 8 else 0][6],
+                ligne[i][6] if ligne[i][5] != '---' else '---',
+                '-' if ligne[i][6] == '---' else colonne[i + 1 if i < 8 else 0][7],
+                ligne[i][7] if ligne[i][6] != '---' else '---',
+                '-' if ligne[i][7] == '---' else colonne[i + 1 if i < 8 else 0][8],
+                ligne[i][8] if ligne[i][7] != '---' else '---',
+                '-' if ligne[i][8] == '---' else colonne[i + 1 if i < 8 else 0][0]
             )
             sortie = sortie[:-1]
             sortie += "|\n"
     sortie += "--|-----------------------------------\n"
     sortie += "  | 1   2   3   4   5   6   7   8   9\n"
     print(sortie)
-    
-# Ici, j'ai voulu tester mon programme en initialisant une nouvelle partie et en utilisant l'identifiant résultant pour ensuite jouer mes coups.
+
+# Ici, j'ai voulu tester mon programme en initialisant une nouvelle
+# partie et en utilisant l'identifiant résultant pour ensuite
+# jouer mes coups.
 
 #if __name__ == '__main__':
     #init = api.initialiser_partie('yabel34')
     #print(init)
-    #coup = api.jouer_coup('989fc7d3-a243-402e-bde9-0875f083e9e6', 'D', (5,2))
+    #coup = api.jouer_coup('fd1961b8-2191-46ce-a59e-ce7386893cd0', 'D', (5,2))
     #afficher_damier_ascii(coup['état'])
     #print(coup)
