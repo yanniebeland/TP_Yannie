@@ -17,7 +17,7 @@ import api
 # Fonction 1.
 # La fonction sert à recevoir les commandes argparse
 # d'un terminal. De plus, elle ne prend rien en entrée
-# et retourne un objet parser contenant les commandes appelées.  
+# et retourne un objet parser contenant les commandes appelées.
 
 def analyser_commande():
     parser = argparse.ArgumentParser(description='Jeu Quoridor - phase 1')
@@ -35,7 +35,7 @@ def analyser_commande():
 # toutes les infos de l'état du jeu actuel pour pouvoir
 # l'afficher en sortie. Ainsi, cette fonction ne retourne
 # rien, mais affiche le damier de l'état de jeu actuel
-# (pions et murs placés aux bons endroits selon le 
+# (pions et murs placés aux bons endroits selon le
 # déroulement de la partie). En première ligne de ma
 # fonction, j'ai indiqué que ma matrice de jeu devra
 # afficher un certain nombre de colonnes et de lignes,
@@ -133,6 +133,6 @@ def afficher_damier_ascii(etat_de_jeu):
 #if __name__ == '__main__':
     #init = api.initialiser_partie('yabel34')
     #print(init)
-    #coup = api.jouer_coup('fd1961b8-2191-46ce-a59e-ce7386893cd0', 'D', (5,2))
+    #coup = api.jouer_coup('0644ebf8-4eba-4240-b597-eb0376915397', 'D', (5,2))
     #afficher_damier_ascii(coup['état'])
     #print(coup)
