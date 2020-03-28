@@ -23,7 +23,7 @@ def analyser_commande():
     parser = argparse.ArgumentParser(description='Jeu Quoridor - phase 1')
     parser.add_argument('IDUL', metavar='IDUL',
                         default='yabel34', help="IDUL du joueur")
-    parser.add_argument('-l', '--lister', dest='liste',
+    parser.add_argument('-l', '--lister', action='store_true',
                         help='Lister les identifiants de vos 20 dernières parties.')
     return parser.parse_args()
 
@@ -133,6 +133,6 @@ def afficher_damier_ascii(etat_de_jeu):
 #if __name__ == '__main__':
     #init = api.initialiser_partie('yabel34')
     #print(init)
-    #coup = api.jouer_coup('0644ebf8-4eba-4240-b597-eb0376915397', 'D', (5,2))
+    #coup = api.jouer_coup('490f1932-d4f5-4f3a-9c63-3732bff46d8b', 'D', (5,2))
     #afficher_damier_ascii(coup['état'])
     #print(coup)
